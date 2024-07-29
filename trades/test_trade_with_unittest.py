@@ -17,7 +17,7 @@ class TestTradeWithUnittest(TestCase):
     def test_typical_stock_trade_one(self):
         trade = StockTrade("T1", "NYSE", "AAPL", Decimal("150.50"), 100, "buy")
         self.assertEqual(trade.value(), Decimal("15050.00"))
-        # self.assertEqual(str(trade), "Trade ID: T1, Symbol: AAPL, Price: 150.50, Quantity: 100, Side: buy")
+        self.assertEqual(str(trade), "Trade ID: T1, Symbol: AAPL, Price: 150.50, Quantity: 100, Side: buy")
 
     # Test the price should be 100.75 * 10 = 1007.50
     def test_typical_fractional_price_two(self):
@@ -51,6 +51,6 @@ class TestTradeWithUnittest(TestCase):
         self.assertEqual(trade.value(), Decimal("999999.99"))
 
     # Erroneous Testing
-    # def test_invalid_trade_id(self):
-    #     with self.assertRaises(ValueError):
-    #         StockTrade("", "NYSE", "AAPL", Decimal("100.00"), 10, "buy")
+    def test_invalid_trade_id(self):
+        with self.assertRaises(ValueError):
+            StockTrade("", "NYSE", "AAPL", Decimal("100.00"), 10, "buy")
