@@ -1,5 +1,5 @@
 from decimal import Decimal
-from trade import Trade
+from .trade import Trade
 
 # This class can be Bond trades , Futures trades and Forex trades
 
