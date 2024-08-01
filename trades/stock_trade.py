@@ -30,13 +30,14 @@ class StockTrade(Trade):
         """
 
         self.validate_input(trade_id, exchange, symbol, price, quantity, side)
+        super().__init__(trade_id, exchange, symbol, price, quantity, side)
 
-        self.trade_id = trade_id
-        self.exchange = exchange
-        self.symbol = symbol
-        self.price = price
-        self.quantity = quantity
-        self.side = side
+        # self.trade_id = trade_id
+        # self.exchange = exchange
+        # self.symbol = symbol
+        # self.price = price
+        # self.quantity = quantity
+        # self.side = side
 
     def validate_input(self, trade_id, exchange, symbol, price, quantity, side):
         errors = {
