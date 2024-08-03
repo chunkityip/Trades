@@ -1,3 +1,4 @@
+from trades.stock_trade import StockTrade
 from decimal import Decimal
 from typing import List
 from .trade import Trade
@@ -11,7 +12,7 @@ class Tradebook:
         self.small_trades: List[Trade] = []
         self.same_trades: List[Trade] = []
 
-    def add_trade(self, trade: Trade):
+    def add_trade(self, trade: StockTrade):
         self.trades.append(trade)
         # If it already has first trade
         if not self.first_trade:
@@ -36,8 +37,9 @@ class Tradebook:
 
     def summarize_trade_comparison(self):
         print(f"The reference trade is {self.first_trade}")
-        print(
-            f"The largest trade is {len(self.large_trades)}, the smallest Trade is {len(self.small_trades)} , the same trade is {len(self.same_trades)}")
+        print(f"The largest trade is {len(self.large_trades)}, "
+              f"the smallest Trade is {len(self.small_trades)} , "
+              f"the same trade is {len(self.same_trades)}")
         print(f"Average Value as Largest trade is {self.average_value(self.large_trades)}")
         print(f"Average Value as Smallest trade is {self.average_value(self.small_trades)}")
         print(f"Average Value as Same trade is {self.average_value(self.same_trades)}")

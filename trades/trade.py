@@ -15,5 +15,3 @@ class Trade(ABC):
         def value(self) -> Decimal:
             pass
 
-        def __str__(self):
-            return f"Trade ID: {self.trade_id}, Symbol: {self.symbol}, Price: {self.price}, Quantity: {self.quantity}, Side: {self.side}"
