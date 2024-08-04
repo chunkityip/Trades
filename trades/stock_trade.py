@@ -1,6 +1,7 @@
 from decimal import Decimal
 from .trade import Trade
 
+
 # This class can be Bond trades , Futures trades and Forex trades
 
 class StockTrade(Trade):
@@ -30,13 +31,6 @@ class StockTrade(Trade):
 
         super().__init__(trade_id, exchange, symbol, price, quantity, side)
 
-        # self.trade_id = trade_id
-        # self.exchange = exchange
-        # self.symbol = symbol
-        # self.price = price
-        # self.quantity = quantity
-        # self.side = side
-
     """
         def validate_input(self, trade_id, exchange, symbol, price, quantity, side):
         errors = {
@@ -52,6 +46,13 @@ class StockTrade(Trade):
             if condition:
                 raise ValueError(f"{field} error: {error_message}")
     """
+
+    def __str__(self):
+        return (f"Trade ID: {self.trade_id}, "
+                f"Symbol: {self.symbol}, "
+                f"Price: {self.price}, "
+                f"Quantity: {self.quantity}, "
+                f"Side: {self.side}")
 
     def value(self) -> Decimal:
         return self.price * self.quantity
@@ -78,6 +79,4 @@ class StockTrade(Trade):
 
     # __ge__: Implements greater than or equal to. (Object types)
     def __ge__(self, other):
-        return  self.value() >= other.value()
-
-
+        return self.value() >= other.value()

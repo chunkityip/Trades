@@ -7,12 +7,16 @@ def main():
 
     # Generate and print the statistics
     print("Total Trades Summary:", tradebook.summarize_total_trades())
+    print("------------------------------------------------")
     symbol = input("Enter a stock symbol to summarize: ").strip()
     print(f"Summary by Symbol ({symbol}):", tradebook.summarize_by_symbol(symbol))
+    print("------------------------------------------------")
     exchange = input("Enter an exchange name to summarize: ").strip()
     print(f"Summary by Exchange ({exchange}):", tradebook.summarize_by_exchange(exchange))
 
-    # Trade comparison statistics
+    print("------------------------------------------------")
+    # Trade comparison statistics based on the first trade of the day
+    print("# Trade comparison statistics based on the first trade of the day")
     tradebook.summarize_trade_comparison()
 
 if __name__ == "__main__":

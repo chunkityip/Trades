@@ -36,9 +36,13 @@ class Tradebook:
             self.same_trades.append(trade)
 
     def summarize_trade_comparison(self):
+        if not self.trades:
+            print("No trades to compare.")
+            return
+
         print(f"The reference trade is {self.first_trade}")
         print(f"The largest trade is {len(self.large_trades)}, "
-              f"the smallest Trade is {len(self.small_trades)} , "
+              f"the smallest Trade is {len(self.small_trades)}, "
               f"the same trade is {len(self.same_trades)}")
         print(f"Average Value as Largest trade is {self.average_value(self.large_trades)}")
         print(f"Average Value as Smallest trade is {self.average_value(self.small_trades)}")
@@ -49,20 +53,23 @@ class Tradebook:
             return Decimal(0)
         return sum(trade.value() for trade in trades) / len(trades)
 
+    # Total value of all trades for a given day
     def summarize_total_trades(self):
         buy_value = sum(trade.value() for trade in self.trades if trade.side == "buy")
         sell_value = sum(trade.value() for trade in self.trades if trade.side == "sell")
         return {"Total Buy Value": buy_value, "Total Sell Value": sell_value}
 
+    # Total values for the trades with specific stock symbol
     def summarize_by_symbol(self, symbol: str):
         filtered_trades = [trade for trade in self.trades if trade.symbol == symbol]
-        buy_value = sum(trade.value() for trade in self.trades if trade.side == "buy")
-        sell_value = sum(trade.value() for trade in self.trades if trade.side == "sell")
+        buy_value = sum(trade.value() for trade in filtered_trades if trade.side == "buy")
+        sell_value = sum(trade.value() for trade in filtered_trades if trade.side == "sell")
         return {"Symbol": symbol, "Total Buy Value": buy_value, "Total Sell Value": sell_value}
 
+    # Total values for the trades base ony exchange , such as NYSE, NASDAQ, CHX
     def summarize_by_exchange(self, exchange: str):
-        filtered_trades = filtered_trades = [trade for trade in self.trades if trade.exchange == exchange]
-        buy_value = sum(trade.value() for trade in self.trades if trade.side == "buy")
-        sell_value = sum(trade.value() for trade in self.trades if trade.side == "sell")
+        filtered_trades = [trade for trade in self.trades if trade.exchange == exchange]
+        buy_value = sum(trade.value() for trade in filtered_trades if trade.side == "buy")
+        sell_value = sum(trade.value() for trade in filtered_trades if trade.side == "sell")
         return {"Exchange": exchange, "Total Buy Value": buy_value, "Total Sell Value": sell_value}
 
