@@ -1,8 +1,8 @@
-from unittest import TestCase
-from trades.stock_trade import StockTrade
+import unittest
 from decimal import Decimal
+from trades.stock_trade import StockTrade
 
-class TestTradeWithUnittest(TestCase):
+class TestTradeWithUnittest(unittest.TestCase):
 
     # Typical Testing: two different companies
 
@@ -23,25 +23,25 @@ class TestTradeWithUnittest(TestCase):
     # Test with quantity 1
     # 1.0 * 1 = 1
     def test_small_quantity(self):
-        trade = StockTrade("T3", "NYSE", "VO0", Decimal("1.00"), 1, "buy")
+        trade = StockTrade("T3", "NYSE", "VOO", Decimal("1.00"), 1, "buy")
         self.assertEqual(trade.value(), Decimal("1.00"))
 
     # Test with quantity 1000000
     # 1000000 * 5 = 5000000.00
     def test_large_quantity(self):
-        trade = StockTrade("T4", "NYSE", "VO0", Decimal("5.00"), 1000000, "buy")
+        trade = StockTrade("T4", "NYSE", "VOO", Decimal("5.00"), 1000000, "buy")
         self.assertEqual(trade.value(), Decimal("5000000.00"))
 
     # Test with the minimum price
     # 0.01 * 100 = 1.00
     def test_minimum_price(self):
-        trade = StockTrade("T5", "NYSE", "VO0", Decimal("0.01"), 100, "sell")
+        trade = StockTrade("T5", "NYSE", "VOO", Decimal("0.01"), 100, "sell")
         self.assertEqual(trade.value(), Decimal("1.00"))
 
     # Test with the maximum price
     # 999999.99 * 1 = 999999.99
     def test_maximum_price(self):
-        trade = StockTrade("T6", "NYSE", "VO0", Decimal("999999.99"), 1, "sell")
+        trade = StockTrade("T6", "NYSE", "VOO", Decimal("999999.99"), 1, "sell")
         self.assertEqual(trade.value(), Decimal("999999.99"))
 
     # Erroneous Testing
@@ -77,5 +77,6 @@ class TestTradeWithUnittest(TestCase):
         with self.assertRaises(ValueError):
             StockTrade("T13", "NYSE", "AAPL", Decimal("100.00"), 10, "hold")
 
-if __name__ == '__main__':
-    TestCase.main()
+if __name__ == "__main__":
+    unittest.main()
+

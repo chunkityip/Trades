@@ -35,18 +35,44 @@ class Tradebook:
         else:
             self.same_trades.append(trade)
 
+    def print_reference_trades_statistics(self):
+        self.print_statistics(self.same_trades, "Reference Trades")
+
+    def print_small_trades_statistics(self):
+        self.print_statistics(self.small_trades, "Small Trades")
+
+    def print_large_trades_statistics(self):
+        self.print_statistics(self.large_trades, "Large Trades")
+
+    def print_statistics(self, trades: List[Trade], trade_type: str):
+        if not trades:
+            print(f"No {trade_type}.")
+            return
+
+        total_value = sum(trade.value() for trade in trades)
+        average_value = total_value / len(trades)
+        print(f"{trade_type} Statistics:")
+        print(f"Number of trades: {len(trades)}")
+        print(f"Total value of trades: {total_value}")
+        print(f"Average value of trades: {average_value}")
+
     def summarize_trade_comparison(self):
         if not self.trades:
             print("No trades to compare.")
             return
 
+        self.large_trades.clear()
+        self.small_trades.clear()
+        self.same_trades.clear()
+
+        for trade in self.trades:
+            if trade != self.first_trade:
+                self.categorize_trade(trade)
+
         print(f"The reference trade is {self.first_trade}")
-        print(f"The largest trade is {len(self.large_trades)}, "
-              f"the smallest Trade is {len(self.small_trades)}, "
-              f"the same trade is {len(self.same_trades)}")
-        print(f"Average Value as Largest trade is {self.average_value(self.large_trades)}")
-        print(f"Average Value as Smallest trade is {self.average_value(self.small_trades)}")
-        print(f"Average Value as Same trade is {self.average_value(self.same_trades)}")
+        self.print_reference_trades_statistics()
+        self.print_small_trades_statistics()
+        self.print_large_trades_statistics()
 
     def average_value(self, trades: List[Trade]) -> Decimal:
         if not trades:
