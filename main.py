@@ -3,7 +3,7 @@ from csv_reader import read_trades_from_csv
 
 def main():
     # Read trades from CSV file
-    tradebook = read_trades_from_csv("trades.csv")
+    tradebook = read_trades_from_csv("trades/trades.csv")
 
     # Generate and print the statistics
     print("Total Trades Summary:", tradebook.summarize_total_trades())

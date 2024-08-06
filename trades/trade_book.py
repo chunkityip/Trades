@@ -1,4 +1,4 @@
-from trades.stock_trade import StockTrade
+from .stock import Stock
 from decimal import Decimal
 from typing import List
 from .trade import Trade
@@ -12,7 +12,7 @@ class Tradebook:
         self.small_trades: List[Trade] = []
         self.same_trades: List[Trade] = []
 
-    def add_trade(self, trade: StockTrade):
+    def add_trade(self, trade: Stock):
         self.trades.append(trade)
         # If it already has first trade
         if not self.first_trade:
@@ -83,7 +83,7 @@ class Tradebook:
     def summarize_total_trades(self):
         buy_value = sum(trade.value() for trade in self.trades if trade.side == "buy")
         sell_value = sum(trade.value() for trade in self.trades if trade.side == "sell")
-        return {"Total Buy Value": buy_value, "Total Sell Value": sell_value}
+        return f"Total Buy Value is {buy_value}, Total Sell Value is {sell_value}"
 
     # Total values for the trades with specific stock symbol
     def summarize_by_symbol(self, symbol: str):
